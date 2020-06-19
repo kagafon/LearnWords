@@ -298,6 +298,18 @@ paths:
         required: true
         schema:
           type: string
+      - name: page
+        in: query
+        required: false
+        description: page in the output
+        schema:
+          type: string
+      - name: wordsPerPage
+        in: query
+        required: false
+        description: words per page. Equals 10 by default
+        schema:
+          type: string
     get:
       tags:
         - Users/Words

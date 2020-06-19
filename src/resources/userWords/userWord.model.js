@@ -10,7 +10,8 @@ const UserWordsSchema = new Schema(
     optional: {
       type: Object,
       required: false
-    }
+    },
+    word: { type: Schema.Types.ObjectId, ref: 'Words' }
   },
   { collection: 'userWords' }
 );
