@@ -48,11 +48,12 @@ const getAll = async (userId, group, perPage, filter) => {
   );
 
   const matches = [
-    {
+    /*     {
       $match: {
         group
       }
     }
+ */
   ];
 
   if (filter) {

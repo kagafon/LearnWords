@@ -8,6 +8,14 @@ const StatisticSchema = new Schema(
       type: String,
       required: true
     },
+    /*     date: {
+      type: Date,
+      required: true
+    },
+    game: {
+      type: String,
+      required: true
+    }, */
     learnedWords: {
       type: Number
     },

@@ -15,6 +15,12 @@ const User = new Schema(
       required: true,
       trim: true,
       minlength: 8
+    },
+    registrationDate: {
+      type: Date,
+      required: true,
+      trim: true,
+      minlength: 8
     }
   },
   { collection: 'users' }

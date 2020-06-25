@@ -4,6 +4,11 @@ const statisticService = require('./statistic.service');
 const { statistics } = require('../../utils/validation/schemas');
 const { validator } = require('../../utils/validation/validator');
 
+/* router.get('/:game', validator(statistics, 'body'), async (req, res) => {
+  const statistic = await statisticService.get(req.userId, req.params.game);
+  res.status(OK).send(statistic.toResponse());
+});
+ */
 router.get('/', async (req, res) => {
   const statistic = await statisticService.get(req.userId);
   res.status(OK).send(statistic.toResponse());
@@ -13,5 +18,14 @@ router.put('/', validator(statistics, 'body'), async (req, res) => {
   const statistic = await statisticService.upsert(req.userId, req.body);
   res.status(OK).send(statistic.toResponse());
 });
+
+/* router.put('/:game', validator(statistics, 'body'), async (req, res) => {
+  const statistic = await statisticService.upsert(
+    req.userId,
+    req.params.game,
+    req.body
+  );
+  res.status(OK).send(statistic.toResponse());
+}); */
 
 module.exports = router;

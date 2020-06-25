@@ -501,10 +501,16 @@ paths:
           $ref: '#/components/responses/UnauthorizedError'
         404:
           description: User's word not found
-  /users/{id}/statistics:
+  /users/{id}/statistics/{game}:
     parameters:
       - name: id
         description: userId
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: game
+        description: gameName
         in: path
         required: true
         schema:
