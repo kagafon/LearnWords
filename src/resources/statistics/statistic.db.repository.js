@@ -1,19 +1,19 @@
 const Statistics = require('./statistic.model');
 const { NOT_FOUND_ERROR } = require('../../errors/appErrors');
 
-const get = async (userId, game, date) => {
+const get = async (userId /* , game , date */) => {
   //  console.log({ userId, game, date });
-  const statistic = await Statistics.findOne({ userId, game, date });
+  const statistic = await Statistics.findOne({ userId /* game  , date */ });
   if (!statistic) {
-    throw new NOT_FOUND_ERROR('Cannot find statistic', { game });
+    throw new NOT_FOUND_ERROR('Cannot find statistic', { userId });
   }
 
   return statistic;
 };
 
-const upsert = async (userId, game, date, statistic) =>
+const upsert = async (userId /* , game , date */, statistic) =>
   Statistics.findOneAndUpdate(
-    { userId, game, date },
+    { userId /* , game , date */ },
     { $set: statistic },
     { upsert: true, new: true }
   );
