@@ -47,14 +47,15 @@ const getAll = async (userId, group, perPage, filter) => {
     userId
   );
 
-  const matches = [
-    /*     {
+  const matches = [];
+
+  if (group || group === 0) {
+    matches.push({
       $match: {
         group
       }
-    }
- */
-  ];
+    });
+  }
 
   if (filter) {
     matches.push({

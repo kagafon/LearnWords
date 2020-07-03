@@ -9,7 +9,13 @@ const SYMBOLS_REGEX = /[-+_@$!%*?&#.,;:[\]{}]/;
 
 const optionalScheme = Joi.object()
   .max(MAX_OPTIONAL_PROPERTIES)
-  .pattern(/.*/, [Joi.string(), Joi.number(), Joi.boolean(), Joi.date()])
+  .pattern(/.*/, [
+    Joi.string(),
+    Joi.number(),
+    Joi.boolean(),
+    Joi.date(),
+    Joi.object()
+  ])
   .custom(optionalValidator, 'optional object validation')
   .error(errors => {
     errors
@@ -27,6 +33,7 @@ const schemas = {
   user: Joi.object()
     .options({ abortEarly: false, allowUnknown: true })
     .keys({
+      name: Joi.string().max(200),
       email: Joi.string().email({ tlds: { allow: false } }),
       password: Joi.string().custom((value, helpers) => {
         const password = value.trim();
