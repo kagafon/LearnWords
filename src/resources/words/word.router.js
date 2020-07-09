@@ -7,6 +7,7 @@ const extractQueryParam = require('../../utils/getQueryNumberParameter');
 
 router.route('/').get(async (req, res) => {
   const page = extractQueryParam(req.query.page, 0);
+  const skip = extractQueryParam(req.query.skip, -1);
   const group = extractQueryParam(req.query.group, 0);
   const wordsPerPage = extractQueryParam(req.query.wordsPerPage, 10);
   const wordsPerExampleSentenceLTE = extractQueryParam(
@@ -15,18 +16,19 @@ router.route('/').get(async (req, res) => {
   );
 
   if (
-    isNaN(page) ||
+    (isNaN(page) && isNaN(skip)) ||
     isNaN(group) ||
     isNaN(wordsPerPage) ||
     isNaN(wordsPerExampleSentenceLTE)
   ) {
     throw new BAD_REQUEST_ERROR(
-      'Wrong query parameters: the group, page, words-per-page and words-per-example-sentence numbers should be valid integers'
+      'Wrong query parameters: the group, page or startFrom, words-per-page and words-per-example-sentence numbers should be valid integers'
     );
   }
 
   const words = await wordService.getAll({
     page,
+    skip,
     group,
     wordsPerExampleSentenceLTE,
     wordsPerPage

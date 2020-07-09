@@ -3,17 +3,25 @@ const { NOT_FOUND_ERROR } = require('../../errors/appErrors');
 const ENTITY_NAME = 'word';
 
 const getAll = async conditions => {
-  const { group, page, wordsPerExampleSentenceLTE, wordsPerPage } = conditions;
+  const {
+    group,
+    page,
+    skip,
+    wordsPerExampleSentenceLTE,
+    wordsPerPage
+  } = conditions;
   if (wordsPerExampleSentenceLTE) {
     return Word.find({
       group,
       wordsPerExampleSentence: { $lte: wordsPerExampleSentenceLTE }
     })
-      .skip(page * wordsPerPage)
+      .skip(skip >= 0 ? skip : page * wordsPerPage)
       .limit(wordsPerPage);
   }
 
-  return Word.find({ group, page });
+  return Word.find({ group })
+    .skip(skip >= 0 ? skip : page * wordsPerPage)
+    .limit(wordsPerPage);
 };
 
 const getQuantity = async (group, wordsPerExampleSentenceLTE) => {

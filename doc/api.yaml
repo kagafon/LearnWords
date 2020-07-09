@@ -119,6 +119,12 @@ paths:
         description: page in the group
         schema:
           type: string
+      - name: skip
+        in: query
+        required: false
+        description: skip words number
+        schema:
+          type: string
       - name: wordsPerExampleSentenceLTE
         in: query
         required: false
