@@ -19,9 +19,7 @@ const getAll = async conditions => {
       .limit(wordsPerPage);
   }
 
-  return Word.find({ group })
-    .skip(skip >= 0 ? skip : page * wordsPerPage)
-    .limit(wordsPerPage);
+  return Word.find({ group, page });
 };
 
 const getQuantity = async (group, wordsPerExampleSentenceLTE) => {
